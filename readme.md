@@ -15,6 +15,6 @@
 
 ## TODO:
 
--[ ] Chrome Play Store
--[ ] Firefox Add-ons
--[ ] Apple App Store
+- [ ] Chrome Play Store
+- [ ] Firefox Add-ons
+- [ ] Apple App Store
