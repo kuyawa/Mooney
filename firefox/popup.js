@@ -1,4 +1,6 @@
-// Run main on document ready
+// Popup script
+// Use innerText or textContent instead of innerHTML
+
 var DEBUG = true;
 
 const Panels = { login:'login', balances:'balances', history:'history', payment:'payment', offers:'offers', trustline:'trustline', inflation:'inflation', transaction:'transaction', options:'options', warning:'warning' };
@@ -122,7 +124,7 @@ function hideLoader() {
 
 function toast(text, warn=false, secs=5) {
 	var toaster = $('toast')
-	toaster.innerHTML = text;
+	toaster.textContent = text;
 	toaster.style.display = 'block';
 	toaster.addEventListener('click', clearToast, false);
 	toaster.style.backgroundColor = (warn?'#800':'#369');
@@ -237,17 +239,18 @@ function onAccountCleared(ok) {
 }
 
 function clearStatus() {
-	$$$('status').innerHTML = '&nbsp;';
+	//$$$('status').innerHTML = '&nbsp;';
+	$$$('status').textContent = '';
 	//$$$('status').style.backgroundColor = 'transparent';
 }
 
 function showStatus(text) {
-	$$$('status').innerHTML = text;
+	$$$('status').textContent = text;
 	//$$$('status').style.backgroundColor = '#88000044';
 }
 
 function showStatusLogin(text) {
-	$$('#panel-login status').innerHTML = text;
+	$$('#panel-login status').textContent = text;
 	$$('#panel-login status').style.backgroundColor = '#88000044';
 }
 
@@ -287,6 +290,8 @@ function showBalances(assets) {
     var table = $$('#panel-balances #assets');
     var row = '<tr id="{id}" issuer="{issuer}"><td>{sym}</td><td>{name}</td><td>{bal}</td></tr>';
     var html = '';
+
+    // TODO: Build table row by row using nodes
     table.tBodies[0].innerHTML = '';
     //console.log(assets);
 
@@ -312,7 +317,7 @@ function showPanelPayment() {
 		var schema = parseSchema(currentLink);
 		//console.log('Schema',schema);
 		var source = myAccount.publicKey.substr(0,10);
-		$$('#panel-payment #source').innerHTML = source || '';
+		$$('#panel-payment #source').textContent = source || '';
 		$$('#panel-payment #address').value    = schema.parameters['destination'] || '';
 		$$('#panel-payment #amount').value     = schema.parameters['amount'] || '';
 		$$('#panel-payment #notes').value      = schema.parameters['memo'] || '';
@@ -472,12 +477,12 @@ function sendMoney(from, to, amount, note, asset) {
 
 function disableMainButton(text='WAIT') {
   $$$('button-main').setAttribute('disabled','disabled');
-  //$$$('button-main').innerHTML = text;
+  //$$$('button-main').textContent = text;
 }
 
 function enableMainButton(text='DONE') {
   $$$('button-main').removeAttribute('disabled');
-  //$$$('button-main').innerHTML = text;
+  //$$$('button-main').textContent = text;
 }
 
 
@@ -713,7 +718,7 @@ function showPanelOptions() {
 function setTheme() {
 	chrome.storage.local.get('theme', function(data) {
 		if(data.theme=='lite'){ document.body.setAttribute('class', data.theme); }
-		$('theme-name').innerHTML = data.theme=='lite'?'dark':'lite';
+		$('theme-name').textContent = data.theme=='lite'?'dark':'lite';
 		//console.log('Theme', data.theme);
 	});
 }
@@ -722,7 +727,7 @@ function toggleTheme() {
 	var theme = document.body.getAttribute('class');
 	var newTheme = (theme=='lite'?'dark':'lite');
 	document.body.setAttribute('class', newTheme);
-	$('theme-name').innerHTML = theme;
+	$('theme-name').textContent = theme;
     chrome.storage.local.set({theme: newTheme});
 }
 
@@ -855,6 +860,11 @@ function onLastLink(link) {
 
 function log(str) {
     //if(DEBUG) { console.log(str); }
+}
+
+function textNode(node, text) {
+	var textNode = document.createTextNode(text);
+	node.appendChild(textNode)
 }
 
 function dateShort(time) {

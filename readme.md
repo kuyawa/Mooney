@@ -18,3 +18,8 @@
 - [ ] Chrome Play Store
 - [ ] Firefox Add-ons
 - [ ] Apple App Store
+
+## Disclaimer
+
+Your account information will be saved on the keychain or chrome storage and never transmitted or shared with anybody or any website. We advise you to use a secondary account for web payments and keep the balance low. Mooney is not responsible for any loss. Use at your own risk.
+
