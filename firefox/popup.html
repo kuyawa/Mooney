@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mooney</title>
+<link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body class="dark">
+
+<section id="panel-login">
+    <header>
+        <h1><img id="logo" src="images/icon-light.png" width="48"> Mooney <small id="version">1.0</small></h1>
+    </header>
+    <content>
+        <p>Mooney is a wallet to pay for stuff on the web using Stellar<br>You need to enter your secret key in order to use Mooney</p>
+    </content>
+    <div id="account">
+        <li><input type="text" id="secret" placeholder="Enter your secret key"></li>
+        <button id="button-login">LOGIN</button>
+    </div>
+    <div>
+        <p id="status">&nbsp;</p>
+    </div>
+    <footer>
+        <p class="small">Your account information will be saved on the keychain and never shared with anybody or any website. We advise you to use a secondary account for web payments and keep the balance low. Mooney is not responsible for any loss. Use at your own risk.</p>
+        <p class="copy">&copy; 2018 Mooney</p>
+    </footer>
+</section>
+
+<section id="panel-balances">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+
+    <img id="icon-refresh" class="icon-right"  src="images/refresh.png" width="24">
+    <img id="icon-spacer"  class="icon-left icon-blank" src="images/blank.png" width="24">
+    <h2 class="app-module">Balances</h2>
+
+    <div id="main">
+      <table id="assets" class="assets">
+          <tbody>
+            <tr id="XLM" issuer=""><td>XLM</td><td>Stellar Lumens</td><td>0.00</td></tr>
+          </tbody>
+      </table>
+    </div>
+    <div id="toolbar" class="toolbar">
+      <button id="button-ledger" class="button-bar">HISTORY</button>
+      <button id="button-gopay"  class="button-bar">PAYMENT</button>
+    </div>
+</section>
+
+<section id="panel-history">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+
+    <img id="icon-refresh" class="icon-right" src="images/refresh.png" width="24">
+    <img id="icon-spacer"  class="icon-left icon-blank" src="images/blank.png" width="24">
+    <h2 class="app-module">History</h2>
+
+    <div id="main">
+          <table id="ledger" class="ledger">
+              <tbody></tbody>
+          </table>
+    </div>
+</section>
+
+<section id="panel-payment">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+
+    <img id="icon-refresh" class="icon-right" src="images/refresh.png" width="24">
+    <img id="icon-spacer"  class="icon-left icon-blank" src="images/blank.png" width="24">
+    <h2 class="app-module">Payment</h2>
+
+    <div id="main">
+      <ul id="accounts">
+        <li id="list-assets">
+          <h3 class="act-name">From Account <span id="source"></span></h3>
+          <table id="assets" class="assets">
+              <tbody>
+                <tr id="XLM" issuer=""><td>XLM</td><td>Stellar Lumens</td><td>0.00</td></tr>
+              </tbody>
+          </table>
+        </li>
+        <li>
+          <input type="hidden" id="issuer" value="">
+          <div class="clear"><label class="label">To Address:</label> <input type="textbox" id="address" class="address" placeholder="Enter the recipient's address..."></div>
+          <div class="clear"><label class="label">Amount to send:</label> <div class="floater"><input type="textbox" id="amount" class="number" placeholder="0.00" value="1.00"> <input type="textbox" id="asset" value="XLM"></div></div>
+          <div class="clear"><label class="label">Memo:</label> <input type="textbox" id="notes" class="notes" value=""></div>
+        </li>
+      </ul>
+    </div>
+
+    <div id="status" class="status">Verify the address and amount to send</div>
+    <button id="button-main" class="button-main">SEND PAYMENT</button>
+</section>
+
+<section id="panel-inflation">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+    <h2 class="app-module">Inflation</h2>
+    <div id="main">
+        <label class="label title">Inflation Destination</label>
+        <input type="textbox" id="inflation-destin" class="address" value="">
+        <label class="label info">You will set inflation destination to this address so you can collect 1% inflation per year</p>
+    </div>
+    <button id="button-main" class="button-main">SET INFLATION</button>
+</section>
+
+<section id="panel-trustline">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+    <h2 class="app-module">Trustline</h2>
+    <div id="main">
+          <div>
+            <label class="title">Issuer Address</label>
+            <input type="textbox" id="trustline-issuer" class="address" value="">
+          </div>
+          <div>
+            <label class="title">Asset Code</label>
+            <input type="textbox" id="trustline-code" value="">
+          </div>
+          <div>
+            <label class="title">Max Limit</label>
+            <input type="textbox" id="trustline-limit" value="">
+          </div>
+          <div>
+            <label class="info">Leave blank for max limit<br>Set as 0 to eliminate trustline</label>
+          </div>
+    </div>
+    <button id="button-main" class="button-main">ADD TRUSTLINE</button>
+</section>
+
+<section id="panel-offers">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24">
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+    <h2 class="app-module">Offers</h2>
+    <div id="main">
+          <label class="title buy">BUY</label>
+          <div class="group">
+            <li><label>Code  </label><input type="textbox" id="buy-code"   placeholder="code"   disabled></li>
+            <li><label>Issuer</label><input type="textbox" id="buy-issuer" placeholder="issuer" disabled></li>
+            <li><label>Amount</label><input type="textbox" id="buy-amount" placeholder="amount" value=""></li>
+            <li><label>Price </label><input type="textbox" id="buy-price"  placeholder="price"  value=""></li>
+          </div>
+          <label class="title sell">SELL</label>
+          <div class="group">
+            <li><label>Code  </label><input type="textbox" id="sell-code"   placeholder="code"   disabled></li>
+            <li><label>Issuer</label><input type="textbox" id="sell-issuer" placeholder="issuer" disabled></li>
+            <li><label>Amount</label><input type="textbox" id="sell-amount" placeholder="amount" value=""></li>
+            <li><label>Price </label><input type="textbox" id="sell-price"  placeholder="price"  value=""></li>
+          </div>
+    </div>
+    <button id="button-main" class="button-main">Make Offer</button>
+</section>
+
+<section id="panel-options">
+    <img id="icon-options" class="icon-right" src="images/options.png" width="24" disabled>
+    <img id="icon-goback"  class="icon-left"  src="images/goback.png"  width="24">
+    <h1 class="app-title">Mooney</h1>
+    <h2 class="app-module">Options</h2>
+    <div id="main">
+      <li>
+        <input type="checkbox" id="check-theme">
+        <label for="check-theme" id="label-theme">Use <span id="theme-name">light</span> theme</label>
+      </li>
+      <li>
+        <input type="checkbox" id="check-trust">
+        <label for="check-trust">Automatically change trust for assets not in wallet</label>
+      </li>
+      <li>
+        <input type="checkbox" id="check-fund">
+        <label for="check-fund">Create account if not found when sending money</label>
+      </li>
+      <li>
+        <input type="checkbox" id="check-never">
+        <label for="check-never">Never store my secret key</label>
+      </li>
+    </div>
+    <button id="button-logout" class="button-main">LOGOUT</button>
+</section>
+
+<section id="panel-warning">
+    <p>Oops! Warning here</p>
+</section>
+
+<svg id="loader" xmlns="http://www.w3.org/2000/svg" width="50px"  height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="loader">
+    <circle cx="50" cy="50" fill="#00000044" r="44"></circle>
+    <circle cx="50" cy="50" fill="none" stroke="#394951" stroke-width="6" r="32" stroke-dasharray="90 50">
+        <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.2s" begin="0s" repeatCount="indefinite"></animateTransform>
+    </circle>
+    <circle cx="50" cy="50" fill="none" stroke="#394951" stroke-width="4" r="16" stroke-dasharray="50 20">
+        <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.8s" begin="0s" repeatCount="indefinite"></animateTransform>
+    </circle>
+    <circle cx="50" cy="50" fill="none" stroke="#394951" stroke-width="2" r="4" stroke-dasharray="90 10">
+        <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="3.2s" begin="0s" repeatCount="indefinite"></animateTransform>
+    </circle>
+</svg>
+
+<div id="toast">Something went wrong<br>Please try again later</div>
+
+<script src="stellar.js"></script>
+<!-- <script src="wallet.js"></script> -->
+<script src="popup.js"></script>
+</body>
+</html>

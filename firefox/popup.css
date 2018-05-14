@@ -1,0 +1,189 @@
+/* POPUP */
+
+body { display: flex; flex: 1; }
+body { position: relative; overflow: hidden; width: 415px; height: 496px; max-width: 415px; max-height: 496px; margin: 0 auto; font: normal 1em/1.4 sans-serif; color: #E0E6EA; background-color: #1A262C; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: 300; }
+li { list-style-type: none; }
+
+section { width: 415px; display:none; }
+#panel-login     { display: none; }
+#panel-balances  { display: none; }
+#panel-payment   { display: none; }
+#panel-offers    { display: none; }
+#panel-inflation { display: none; }
+#panel-options   { display: none; }
+
+
+/* COMMON */
+
+.app-title   { height: 24px; margin: 0; padding: 8px 0; font-size: 1.2em; text-align: center; background-color: #1A262C; color: #A8B3CE; }
+.app-title a { text-decoration: none; color: #A8B3CE; }
+.app-module  { height: 22px; margin: 0; padding: 8px 0; font-size: 1.0em; text-align: center; background-color: #394951; border-top: 1px solid #1A262C; border-bottom: 1px solid #1A262C; }
+
+.icon-left  { float: left;  width: 24px; margin: 8px 0 0 10px; cursor: pointer; }
+.icon-right { float: right; width: 24px; margin: 8px 10px 0 0; cursor: pointer; }
+.icon-blank { cursor: initial; }
+
+.status { height: 18px; padding: 10px; text-align: center; font-size: 0.8em; font-weight: 300; color: #A8B3CE; background-color: #1A262C; border-top: 1px solid #394951; }
+
+.button-main { display: block; width: 100%; height: 40px; margin: 0; padding: 10px 0; font-size: 1.0em; color: #EEE; background-color: #053; border-radius: 0; border:none; outline: none; cursor: pointer; }
+.button-main:hover     { color: #FFF; background-color: #064; }
+.button-main:active    { color: #EEE; background-color: #053; }
+.button-main[disabled] { color: #246; background-color: #0A161C; }
+
+.toolbar { display: flex; flex-flow: row; height: 38px; }
+.button-bar { flex: 1; height: 38px; margin: 0; padding: 10px 0; font-size: 1.0em; color: #CDE; background-color: #369; border-radius: 0; border:1px solid #147; cursor: pointer; }
+.button-bar:hover     { color: #FFF; background-color: #47A; }
+.button-bar:active    { color: #CDE; background-color: #258; }
+.button-bar[disabled] { color: #246; background-color: #0A161C; }
+
+.credit { color: #6E914F; }
+.debit  { color: #A55F6B; }
+.funded { color: #336699; }
+
+#toast  { display: none; position: fixed; top: 45%; left: 30px; right: 30px; padding: 20px; text-align: center; background-color: #880000; color: #FFF; box-shadow: 0 0 0 10px #FFFFFF66; border-radius: 8px; /*border: 1px solid #600;*/ }
+#loader { display: none; position: fixed; top: 45%; left: 182px; }
+
+label { color: #E0E6EA; }
+input { color: #E0E6EA; background-color: #293941; border: 1px solid #357; border-radius: 3px; }
+
+
+/* LOGIN */
+
+#panel-login { padding: 20px; text-align: center; }
+#panel-login li { list-style-type: none; }
+#panel-login header h1 { margin: 20px; font-size: 3em; font-weight: 300; font-family: 'helvetica neue'; }
+#panel-login header img { vertical-align: middle; margin-top: -10px; margin-left: -30px; }
+#panel-login header small { font-size: 0.5em; }
+#panel-login content { font-size: 0.8em; }
+#panel-login footer { margin-top: 40px; }
+/*
+#panel-login button { width: 120px; margin: 10px; padding: 4px 20px; outline: none; border: 1px solid #AAA; background-color: #CCC; border-radius: 3px; cursor: pointer; }
+#panel-login button:hover  { border: 1px solid #BBB; background-color: #DDD; }
+#panel-login button:active { border: 1px solid #888; background-color: #BBB; }
+*/
+#panel-login input  { width: 360px; margin: 20px 0; padding: 8px 0; text-align: center; font-size: 0.8em; font-family: monospace; }
+#panel-login .small { font-size: 0.7em; color: #A8B3CE; }
+#panel-login .copy  { font-size: 0.8em; color: #E0E6EA; }
+#panel-login button { width: 140px; margin: 10px; padding: 6px 20px; outline: none; border-radius: 3px; border: 1px solid #147; background-color: #369; color: #CDE; font-variant: small-caps; cursor: pointer; }
+#panel-login button:hover  { background-color: #47A; color: #FFF; }
+#panel-login button:active { background-color: #258; color: #CDE; }
+#panel-login button[disabled] { color: #DEF; background-color: #394951; }
+#panel-login #status { margin: 0; padding: 4px 0; font-size: 0.8em; }
+
+
+/* BALANCES */
+
+#panel-balances #main { flex: 1 1 auto; overflow: scroll; height: 378px; min-height: 378px; max-height: 378px; margin: 0; padding: 0 10px; }
+#panel-balances .assets { width: 100%; border-collapse: collapse; margin: 0; }
+#panel-balances .assets tr:nth-child(even) { background-color: #1C2C36; }
+#panel-balances .assets td { padding: 2px 4px; }
+#panel-balances .assets td:nth-child(3) { text-align: right }
+
+
+/* HISTORY */
+
+#panel-history #main { flex: 1 1 auto; overflow: scroll; height: 415px; min-height: 415px; max-height: 415px; margin: 0; padding: 0 10px; }
+#panel-history .ledger { width: 100%; border-collapse: collapse; margin: 0; }
+#panel-history .ledger tr:nth-child(even) { background-color: #1C2C36; }
+#panel-history .ledger td { padding: 2px 4px; }
+#panel-history .ledger td:nth-child(3) { text-align: right; }
+#panel-history .ledger td:nth-child(4) { text-align: right; }
+
+
+/* PAYMENT */
+
+#panel-payment #main { flex: 1 1 auto; /*overflow: scroll;*/ height: 337px; min-height: 337px; max-height: 337px; margin: 0; padding: 0; }
+#panel-payment #accounts    { margin: 0; padding: 0; }
+#panel-payment #accounts li { padding: 10px 20px; border-bottom: 4px solid #394951; }
+#panel-payment #accounts li:last-child { border-bottom: none; }
+
+#panel-payment .act-name   { margin: 0; padding: 2px 0; font-size: 1.2em; }
+#panel-payment .act-short  { box-sizing: border-box; overflow: hidden; width: 200px; margin: 0; padding: 2px 0; font-size: 0.8em; color: #A8B3CE; text-overflow: ellipsis; }
+#panel-payment .act-short big { font-size: 2.0em; }
+
+#panel-payment #list-assets { overflow: scroll; height: 154px; }
+#panel-payment .assets { width: 100%; border-collapse: collapse; margin-top: 10px; }
+#panel-payment .assets th { font-weight: normal; }
+#panel-payment .assets th:nth-child(3) { text-align: right }
+#panel-payment .assets td:nth-child(3) { text-align: right }
+#panel-payment .assets tr:hover  td { background-color: #293941; cursor: pointer; }
+#panel-payment .actions { text-align: center; }
+
+#panel-payment input { display: inline-block; padding: 4px 8px; text-align: left; font-size: 1.0em; }
+#panel-payment input.address { box-sizing: border-box; width: 100%; padding: 8px 6px; font-size: 0.6em; text-align: left; }
+#panel-payment input.number  { width: 120px; text-align: right; }
+#panel-payment input.notes   { width: 200px; text-align: left; }
+
+#panel-payment .clear{ clear: both; overflow: hidden; margin-bottom: 10px; }
+#panel-payment .floater { float: right; display: inline-block; }
+#panel-payment input#amount { width: 138px; }
+#panel-payment input#asset  { width:  40px; text-transform: uppercase; }
+#panel-payment input#notes  { float: right; }
+
+
+/* INFLATION */
+
+#panel-inflation #main { flex: 1 1 auto; overflow: scroll; height: 376px; min-height: 376px; max-height: 376px; margin: 0; padding: 0 20px; }
+#panel-inflation label { display: block; padding: 4px 8px; text-align: center; font-size: 1.0em; }
+#panel-inflation label.title { margin: 50px 0 10px; font-size: 1.2em; font-weight: 300; }
+#panel-inflation label.info  { color: #A8B3CE; }
+#panel-inflation input { display: block; box-sizing: border-box; width: 100%; padding: 8px 6px; text-align: center; font-size: 0.8em; font-family: monospace; }
+
+
+/* OFFERS */
+
+#panel-offers #main  { flex: 1 1 auto; overflow: scroll; height: 376px; min-height: 376px; max-height: 376px; margin: 0; padding: 0; text-align: center; }
+#panel-offers .group { display: block; margin: 0; padding: 20px 0; }
+#panel-offers label  { display: inline-block; width: 100px; margin: 0; text-align: left; }
+#panel-offers label.title { display: block; width: 100%; margin: 0; padding: 4px 0; text-align: center; }
+#panel-offers label.buy   { background-color: #686; }
+#panel-offers label.sell  { background-color: #855; }
+#panel-offers input { display: inline-block; padding: 4px 6px; text-align: center; font-size: 1em; }
+#panel-offers input[disabled] { color: #ABC; background-color: #192931; border: 1px solid #135; }
+
+
+/* TRUSTLINE */
+
+#panel-trustline #main { flex: 1 1 auto; overflow: scroll; height: 376px; min-height: 376px; max-height: 376px; margin: 0; padding: 0 20px; }
+#panel-trustline label { display: block; padding: 4px 8px; text-align: center; font-size: 1.0em; }
+#panel-trustline label.title { margin: 20px 0 4px; font-size: 1.2em; font-weight: 300; }
+#panel-trustline label.info  { color: #A8B3CE; }
+#panel-trustline input { display: block; margin: 0 auto; padding: 8px 6px; text-align: center; font-size: 1.0em; }
+#panel-trustline input.address { box-sizing: border-box; width: 100%; font-size: 0.8em; font-family: monospace; }
+
+
+/* OPTIONS */
+
+#panel-options #main { flex: 1 1 auto; overflow: scroll; height: 376px; min-height: 376px; max-height: 376px; margin: 0; padding: 0 20px; }
+#panel-options li { padding: 10px 0; border-bottom: 1px solid #394951; }
+#panel-options label { cursor: pointer; }
+
+
+/* THEME */
+
+body.dark { color: #E0E6EA; background-color: #1A262C; }
+
+body.lite { color: #333; background-color: #EEE; }
+body.lite .app-title   { background-color: #369; color: #D8E3FE; }
+body.lite .app-title a { color: #D8E3FE; }
+body.lite .app-module  { color: #258; background-color: #C9D9E1; border-bottom: 1px solid #ABC; border-bottom: 1px solid #ABC; }
+body.lite label { color: #333; }
+body.lite input { color: #246; background-color: #C9D9E1; border: 1px solid #ABC; }
+body.lite #toast { box-shadow: 0 0 0 10px #00000033; }
+body.lite #panel-login   #logo { content: url("images/icon.png"); }
+body.lite #panel-balances .assets tr:nth-child(even) { background-color: #DDD; }
+body.lite #panel-history  .ledger tr:nth-child(even) { background-color: #DDD; }
+body.lite #panel-payment #status { color: #258; background-color: #C9D9E1; border-top: 1px solid #abc; }
+body.lite #panel-payment #accounts li { padding: 20px; border-bottom: 4px solid #ABC; }
+body.lite #panel-payment #accounts li:last-child { border-bottom: none; }
+body.lite #panel-payment .assets tr:hover td { background-color: #ABC; }
+body.lite #panel-options li { border-bottom: 1px solid #CCC; }
+body.lite #panel-offers input[disabled] { color: #666; background-color: #CCC; border: 1px solid #AAA; }
+body.lite #panel-offers label.buy  { background-color: #ACA; }
+body.lite #panel-offers label.sell { background-color: #CAA; }
+body.lite .button-main[disabled] { color: #777; background-color: #2A364C; }
+
+
+/* END */
