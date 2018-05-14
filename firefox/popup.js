@@ -12,7 +12,7 @@ var myAccount      = { publicKey:null, secretKey:null };
 var balancesLoaded = false;
 var historyLoaded  = false;
 var assetsLoaded   = false;
-var network        = 'test'; // test
+var network        = 'live'; // test
 
 if(network=='live'){
     StellarSdk.Network.usePublicNetwork();
@@ -25,9 +25,9 @@ if(network=='live'){
 // Message listener
 if(chrome.runtime.onMessage) {
 	chrome.runtime.onMessage.addListener(function (msg, sender) {
-	    console.log('Message received in popup', msg);
+	    //console.log('Message received in popup', msg);
 	    if ((msg.from === 'background') && (msg.subject === 'schema')) {
-	        console.log('SCHEMA FROM BACKGROUND', msg.data);
+	        //console.log('SCHEMA FROM BACKGROUND', msg.data);
 	    }
 	    if ((msg.from === 'background') && (msg.subject === 'account-loaded')) {
 	        onAccountLoaded(msg.data);
@@ -39,7 +39,7 @@ if(chrome.runtime.onMessage) {
 	        onAccountCleared(msg.data);
 	    }
 	    if ((msg.from === 'content') && (msg.subject === 'schema')) {
-	        console.log('SCHEMA FROM CONTENT', msg.data);
+	        //console.log('SCHEMA FROM CONTENT', msg.data);
 	    }
 	});
 }
@@ -62,22 +62,22 @@ function main() {
 
 	if(inExtension){
 		DEBUG = !('update_url' in chrome.runtime.getManifest());
-		console.log('Manifest',  chrome.runtime.getManifest());
-		console.log('Extension', chrome.management.ExtensionType);
-		console.log('Install',   chrome.management.ExtensionInstallType);
+		//console.log('Manifest',  chrome.runtime.getManifest());
+		//console.log('Extension', chrome.management.ExtensionType);
+		//console.log('Install',   chrome.management.ExtensionInstallType);
 	}
 
-	console.log('Popup main');
+	//console.log('Popup main');
 	//hidePanels();
 	setTheme();
 	eventHandlers();
 	checkLastLink();
 	isLogged(ok=>{
 		if(!ok){
-			console.log('Not logged');
+			//console.log('Not logged');
 			showPanelLogin();
 		} else {
-			console.log('Yes logged');
+			//console.log('Yes logged');
 			loadAccount();
 		}
 	});
@@ -106,7 +106,7 @@ function showPanel(panel, back=false){
 
 function hidePanels(){
 	var panels = document.querySelectorAll('section');
-	console.log('Panels',panels.length);
+	//console.log('Panels',panels.length);
 	for (var i = 0; i < panels.length; i++) {
 		panels[i].style.display = 'none';
 	}
@@ -143,16 +143,16 @@ function showPanelLogin() {
 }
 
 function isLogged(callback) {
-	console.log('Checking if logged...');
+	//console.log('Checking if logged...');
 	if(inExtension){
 		// token is account hash, if available then is logged else is not
 		chrome.storage.local.get('token', function(data) {
-			console.log('token', data);
+			//console.log('token', data);
 			var ok = (data.token ? true : false);
 			callback(ok);
 		});
 	} else {
-		console.log('ISLOGGED: Not in extension');
+		//console.log('ISLOGGED: Not in extension');
 		callback(false);
 	}
 }
@@ -202,16 +202,16 @@ function loadAccount() {
 }
 
 function onAccountLoaded(account) {
-	console.log('Account loaded', account);
+	//console.log('Account loaded', account);
 	if(account){
 		myAccount = account;
 		var keyPair = StellarSdk.Keypair.fromSecret(myAccount.secretKey)
 		myAccount.publicKey = keyPair.publicKey();
-		console.log('My account', myAccount);
+		//console.log('My account', myAccount);
 		if(currentLink){
-			console.log('Current link', currentLink);
+			//console.log('Current link', currentLink);
 			var schema = parseSchema(currentLink);
-			console.log('Current schema', schema);
+			//console.log('Current schema', schema);
 			switch(schema.operation){
 				case Ops.tx:        showPanelTransaction(); break;
 				case Ops.pay:       showPanelPayment();     break;
@@ -230,7 +230,7 @@ function onAccountLoaded(account) {
 }
 
 function onAccountCleared(ok) {
-	console.log('Account cleared', ok);
+	//console.log('Account cleared', ok);
 	if(ok){
 		showPanelLogin();
 	}
@@ -260,11 +260,11 @@ function showPanelBalances() {
 }
 
 function loadBalances() {
-	console.log('Loading balances...');
+	//console.log('Loading balances...');
 	showLoader();
     var server = new StellarSdk.Server(serverUrl);
     server.loadAccount(myAccount.publicKey).then(function(account) {
-        console.log('Info for '+myAccount.publicKey, account);
+        //console.log('Info for '+myAccount.publicKey, account);
         var bals = [];
         account.balances.forEach(function(balance) {
             if(balance.asset_type=='native'){
@@ -278,7 +278,7 @@ function loadBalances() {
         showBalances(bals);
     }).catch(function(error){
         hideLoader();
-        console.error('ERROR:', error);
+        //console.error('ERROR:', error);
         toast('Error loading balances', true);
     });
 }
@@ -288,7 +288,7 @@ function showBalances(assets) {
     var row = '<tr id="{id}" issuer="{issuer}"><td>{sym}</td><td>{name}</td><td>{bal}</td></tr>';
     var html = '';
     table.tBodies[0].innerHTML = '';
-    console.log(assets);
+    //console.log(assets);
 
     for (var i = 0; i < assets.length; i++) {
     	var item = assets[i];
@@ -306,11 +306,11 @@ function showBalances(assets) {
 //---- PAYMENTS ----------------------------------------
 
 function showPanelPayment() {
-	console.log('Panel payment');
+	//console.log('Panel payment');
 	showPanel(Panels.payment);
 	if(currentLink){
 		var schema = parseSchema(currentLink);
-		console.log('Schema',schema);
+		//console.log('Schema',schema);
 		var source = myAccount.publicKey.substr(0,10);
 		$$('#panel-payment #source').innerHTML = source || '';
 		$$('#panel-payment #address').value    = schema.parameters['destination'] || '';
@@ -323,11 +323,11 @@ function showPanelPayment() {
 }
 
 function loadAssets() {
-	console.log('Loading assets...');
+	//console.log('Loading assets...');
 	showLoader();
     var server = new StellarSdk.Server(serverUrl);
     server.loadAccount(myAccount.publicKey).then(function(account) {
-        console.log('Info for '+myAccount.publicKey, account);
+        //console.log('Info for '+myAccount.publicKey, account);
         var bals = [];
         account.balances.forEach(function(balance) {
             if(balance.asset_type=='native'){
@@ -341,7 +341,7 @@ function loadAssets() {
         showAssets(bals);
     }).catch(function(error){
         hideLoader();
-        console.error('ERROR:', error);
+        //console.error('ERROR:', error);
         toast('Error loading assets', true);
     });
 }
@@ -351,7 +351,7 @@ function showAssets(assets) {
     var row = '<tr id="{id}" issuer="{issuer}"><td>{sym}</td><td>{name}</td><td>{bal}</td></tr>';
     var html = '';
     table.tBodies[0].innerHTML = '';
-    console.log(assets);
+    //console.log(assets);
 
     for (var i = 0; i < assets.length; i++) {
     	var item = assets[i];
@@ -374,7 +374,7 @@ function onAsset() {
     //if(!issuer) { return; }
     $$$('asset').value  = symbol;
     $$$('issuer').value = issuer;
-    console.log('Asset: ', symbol, issuer, event.target);
+    //console.log('Asset: ', symbol, issuer, event.target);
 }
 
 function onPayment() {
@@ -389,7 +389,7 @@ function onPayment() {
     var asset  = StellarSdk.Asset.native();
     if(sym && sym!='XLM' && issuer) { asset = new StellarSdk.Asset(sym, issuer); }
 
-    console.log(adr, amt, note, asset);
+    //console.log(adr, amt, note, asset);
     sendMoney(from, to, amt, note, asset);
 }
 
@@ -411,7 +411,7 @@ function sendMoney(from, to, amount, note, asset) {
         funding = true;  // If the account is not found, fund it
         return;
     }).then(function(){ 
-        console.log(funding?'FUND':'SEND'); 
+        //console.log(funding?'FUND':'SEND'); 
         if(funding){
             showStatus('Funding operation...');
             var operation = StellarSdk.Operation.createAccount({
@@ -425,7 +425,7 @@ function sendMoney(from, to, amount, note, asset) {
                     asset       : asset,
                     amount      : ''+amount
             });
-            console.log('OP: ',operation);
+            //console.log('OP: ',operation);
         }
 
         showStatus('Loading account...');
@@ -442,10 +442,10 @@ function sendMoney(from, to, amount, note, asset) {
         }).then(function(result) {
             showStatus('OK - ' + (funding?'Account funded':'Payment sent'));
             enableMainButton();
-            console.log('Success!', result);
+            //console.log('Success!', result);
             // Update balance
             server.loadAccount(mainAct.publicKey()).then(function(account) {
-                console.log('Balance for '+mainAct.publicKey(), account);
+                //console.log('Balance for '+mainAct.publicKey(), account);
                 var bals = [];
                 account.balances.forEach(function(balance) {
 		            if(balance.asset_type=='native'){
@@ -460,12 +460,12 @@ function sendMoney(from, to, amount, note, asset) {
             });
         }).catch(function(error){
             showStatus('ERROR: Something went wrong!1');
-            console.error('ERROR1:', error);
+            //console.error('ERROR1:', error);
             enableMainButton();
         });
     }).catch(function(error) {
         showStatus('ERROR: Something went wrong!2');
-        console.error('ERROR2:', error);
+        //console.error('ERROR2:', error);
         enableMainButton();
     });
 }
@@ -490,17 +490,17 @@ function showPanelHistory() {
 }
 
 function loadHistory() {
-	console.log('Loading history...');
+	//console.log('Loading history...');
 	showLoader()
     var server = new StellarSdk.Server(serverUrl);
 	server.payments().forAccount(myAccount.publicKey).order('desc').limit(30).call().then(info=>{
-		console.log('Payments',info);
+		//console.log('Payments',info);
 		historyLoaded = true;
 		hideLoader();
 		showHistory(info.records);
 	}).catch(e=>{
 		hideLoader();
-		console.log('Error', e);
+		//console.log('Error', e);
         toast('Error loading history', true);
 	});
 }
@@ -510,7 +510,7 @@ function showHistory(list) {
     var row = '<tr><td>{date}</td><td>{desc}</td><td class="{color}">{amount}</td><td>{asset}</td></tr>';
     var html = '';
     table.tBodies[0].innerHTML = '';
-    console.log(list);
+    //console.log(list);
 
     for (var i = 0; i < list.length; i++) {
     	var item = list[i];
@@ -548,7 +548,7 @@ function showPanelOffers() {
 	showPanel(Panels.offers);
 	if(currentLink){
 		var schema = parseSchema(currentLink);
-		console.log('Schema', schema);
+		//console.log('Schema', schema);
 		if(schema.operation=='manageOffer'){
 			var buyCode    = schema.parameters['buying_asset_code'] || 'XLM';
 			var buyIssuer  = schema.parameters['buying_asset_issuer']  ? schema.parameters['buying_asset_issuer']  : 'NATIVE';
@@ -583,7 +583,7 @@ function showPanelOffers() {
 function updateOfferForm(event) {
 	var field = event.target;
 	var type  = field.id.split('-')[0];
-	console.log(field.id, type);
+	//console.log(field.id, type);
 	var buyAmount  = $$('#panel-offers #buy-amount').value;   // 500 XLM
 	var buyPrice   = $$('#panel-offers #buy-price').value;    // 2
 	var sellAmount = $$('#panel-offers #sell-amount').value;  // 1000 GALT
@@ -626,7 +626,7 @@ function onOffer() {
         amount  : amount,
         price   : price
     };
-    console.log(offer);
+    //console.log(offer);
 
     var operation = StellarSdk.Operation.manageOffer(offer);
     submitOperation(myAccount, operation, 'Offer', ok=>{
@@ -651,7 +651,7 @@ function showPanelInflation() {
 	showPanel(Panels.inflation);
 	if(currentLink){
 		var schema = parseSchema(currentLink);
-		console.log('Schema', schema);
+		//console.log('Schema', schema);
 		if(schema.operation=='setOptions' && schema.parameters['inflationDest']){
 			$$('#panel-inflation #inflation-destin').value = schema.parameters['inflationDest'] || '';
 		}
@@ -675,7 +675,7 @@ function showPanelTrustline() {
 	showPanel(Panels.trustline);
 	if(currentLink){
 		var schema = parseSchema(currentLink);
-		console.log('Schema', schema);
+		//console.log('Schema', schema);
 		if(schema.operation=='changeTrust'){
 			$('trustline-issuer').value = schema.parameters['asset_issuer'] || '';
 			$('trustline-code').value   = schema.parameters['asset_code'] || '';
@@ -714,7 +714,7 @@ function setTheme() {
 	chrome.storage.local.get('theme', function(data) {
 		if(data.theme=='lite'){ document.body.setAttribute('class', data.theme); }
 		$('theme-name').innerHTML = data.theme=='lite'?'dark':'lite';
-		console.log('Theme', data.theme);
+		//console.log('Theme', data.theme);
 	});
 }
 
@@ -723,7 +723,7 @@ function toggleTheme() {
 	var newTheme = (theme=='lite'?'dark':'lite');
 	document.body.setAttribute('class', newTheme);
 	$('theme-name').innerHTML = theme;
-    chrome.storage.local.set({theme: newTheme}, function() { console.log('Theme saved', theme); });
+    chrome.storage.local.set({theme: newTheme});
 }
 
 
@@ -748,12 +748,12 @@ function submitOperation(source, operation, memo, callback) {
         //showStatus('Submitting operation...');
         return server.submitTransaction(env);
     }).then(function(result) {
-        console.log('Success!', result);
+        //console.log('Success!', result);
         //showStatus('Success!');
         enableMainButton();
         if(callback){ callback(true); }
     }).catch(function(error){
-        console.error('ERROR:', error);
+        //console.error('ERROR:', error);
         //showStatus('ERROR: Something went wrong!');
         enableMainButton();
         if(callback){ callback(false); }
@@ -803,7 +803,7 @@ function eventHandlers(){
 
 
 function checkLastLink() {
-	console.log('Checking link...');
+	//console.log('Checking link...');
 	var uri  = parseSchema(window.location.href);
 	var link = uri.parameters['link'];
 	if(link){ /* Opened as notification window */
@@ -823,11 +823,11 @@ function checkLastLink() {
 }
 
 function onLinks(links) {
-	console.log('Back from content script');
-	console.log(links);
+	//console.log('Back from content script');
+	//console.log(links);
 	if(links.length>0){ 
 		var schema = parseSchema(links[0]);
-		console.log(schema);
+		//console.log(schema);
 		// TODO: Verify operation is 'pay'
 		$('address').value = schema.parameters['destination'] || '';
 		$('amount').value  = schema.parameters['amount'] || '';
@@ -836,11 +836,11 @@ function onLinks(links) {
 }
 
 function onLastLink(link) {
-	console.log('Link found...', link);
+	//console.log('Link found...', link);
 	if(link){ 
 		currentLink = link;
 		var schema = parseSchema(link);
-		console.log(schema);
+		//console.log(schema);
 		// TODO: Verify operation is 'pay'
 		$$('#panel-payment #address').value = schema.parameters['destination'] || '';
 		$$('#panel-payment #amount').value  = schema.parameters['amount'] || '';
@@ -854,7 +854,7 @@ function onLastLink(link) {
 //---- UTILS ----------------------------------------
 
 function log(str) {
-    if(DEBUG) { console.log(str); }
+    //if(DEBUG) { console.log(str); }
 }
 
 function dateShort(time) {

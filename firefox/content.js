@@ -1,8 +1,8 @@
 var lastLink = null;
 
-console.log('Content script loaded');
-console.log('ID', chrome.runtime.id);
-console.log('Moz.ID', browser.extension.getURL(''));
+//console.log('Content script loaded');
+//console.log('ID', chrome.runtime.id);
+//console.log('Moz.ID', browser.extension.getURL(''));
 
 function sendMessage(subject, data) {
     var msg = { from: 'content', subject: subject, data: data };
@@ -13,7 +13,7 @@ function sendMessage(subject, data) {
 document.body.addEventListener('click', handleClick);
 
 function handleClick(evt) {
-    console.log('Click',evt);
+    //console.log('Click',evt);
     var target = evt.target;
     var link = null;
     if(target.tagName.toLowerCase()=='a'){ link = target.href; }
@@ -25,13 +25,13 @@ function handleClick(evt) {
             if(target.tagName.toLowerCase()=='a'){ link = target.href; break; }
         }
     }
-    console.log('LINK', link);
+    //console.log('LINK', link);
     if(link){
-        console.log('Check Schema');
+        //console.log('Check Schema');
         var schema = parseSchema(link);
         if(schema.protocol=='web+stellar:'){
             lastLink = link;
-            console.log('Schema parsed', schema);
+            //console.log('Schema parsed', schema);
             evt.preventDefault();
             evt.stopPropagation();
             sendMessage('notify', lastLink);
@@ -46,20 +46,20 @@ function handleClick(evt) {
 
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener(function(msg, sender, callback) {
-    console.log('Message received in script', msg);
+    //console.log('Message received in script', msg);
     if ((msg.from === 'popup') && (msg.subject === 'last-link')) {
-        console.log('Message from popup asking for last link');
-        console.log(lastLink);
+        //console.log('Message from popup asking for last link');
+        //console.log(lastLink);
         callback(lastLink);  // Directly respond to the sender (popup) through the specified callback
     }
     if ((msg.from === 'popup') && (msg.subject === 'links')) {
-        console.log('Message from popup asking for links');
+        //console.log('Message from popup asking for links');
         // Collect the necessary data 
         var links = [];
         for(var i=0; i<document.links.length; i++) {
             links.push(document.links[i].href);
         }
-        console.log(links);
+        //console.log(links);
         callback(links);  // Directly respond to the sender (popup) through the specified callback
     }
 });
@@ -72,7 +72,7 @@ function checkForPaymentLinks() {
 
     for (var i = 0; i < links.length; i++) {
         if(links[i].href.substr(0,12)=='web+stellar:'){
-            console.log(links[i].href);
+            //console.log(links[i].href);
             count++;
         }
     }

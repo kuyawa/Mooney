@@ -13,7 +13,7 @@ var myAccount      = { publicKey:null, secretKey:null };
 var balancesLoaded = false;
 var historyLoaded  = false;
 var assetsLoaded   = false;
-var network        = 'test'; // test
+var network        = 'live'; // test
 
 if(network=='live'){
     StellarSdk.Network.usePublicNetwork();
