@@ -6,7 +6,7 @@
 
 ### Screenshots
 
-![screenshot](mooney.png)
+![screenshot](./shots/mooney.jpg)
 
 ## TODO:
 
