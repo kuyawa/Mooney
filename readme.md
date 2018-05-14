@@ -7,9 +7,14 @@
 ### Screenshots
 
 ![screenshot](./shots/mooney.jpg)
+![screenshot](./shots/mooney1.jpg)
+![screenshot](./shots/mooney2.jpg)
+![screenshot](./shots/mooney3.jpg)
+![screenshot](./shots/mooney4.jpg)
+![screenshot](./shots/mooney5.jpg)
 
 ## TODO:
 
-[ ] Chrome Play Store
-[ ] Firefox Add-ons
-[ ] Apple App Store
+-[ ] Chrome Play Store
+-[ ] Firefox Add-ons
+-[ ] Apple App Store
