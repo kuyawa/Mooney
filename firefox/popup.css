@@ -175,8 +175,8 @@ body.lite #toast { box-shadow: 0 0 0 10px #00000033; }
 body.lite #panel-login   #logo { content: url("images/icon.png"); }
 body.lite #panel-balances .assets tr:nth-child(even) { background-color: #DDD; }
 body.lite #panel-history  .ledger tr:nth-child(even) { background-color: #DDD; }
-body.lite #panel-payment #status { color: #258; background-color: #C9D9E1; border-top: 1px solid #abc; }
-body.lite #panel-payment #accounts li { padding: 20px; border-bottom: 4px solid #ABC; }
+body.lite #panel-payment #status { color: #258; background-color: #C9D9E1; border-top: 1px solid #ABC; }
+body.lite #panel-payment #accounts li { border-bottom: 4px solid #ABC; }
 body.lite #panel-payment #accounts li:last-child { border-bottom: none; }
 body.lite #panel-payment .assets tr:hover td { background-color: #ABC; }
 body.lite #panel-options li { border-bottom: 1px solid #CCC; }

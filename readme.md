@@ -15,8 +15,8 @@
 
 ## TODO:
 
+- [x] Firefox Add-ons
 - [ ] Chrome Play Store
-- [ ] Firefox Add-ons
 - [ ] Apple App Store
 
 ## Disclaimer
