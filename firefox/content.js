@@ -1,3 +1,10 @@
+//----------------------------------------
+// Mooney 1.1
+// LL1 Libertarian License 1.0
+//
+// Content script
+//----------------------------------------
+
 var lastLink = null;
 
 //console.log('Content script loaded');

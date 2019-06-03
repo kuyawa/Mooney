@@ -1,11 +1,24 @@
 {
     "name": "Mooney",
-    "version": "1.0",
+    "version": "1.1",
     "manifest_version": 2,
     "description": "Stellar payments in the browser",
     "homepage_url": "https://github.com/kuyawa/mooney",
 
     "permissions": ["tabs", "activeTab", "storage", "http://*/*", "https://*/*"],
+
+    "protocol_handlers": [
+        {
+            "protocol": "ext+stellar",
+            "name": "Stellar Network",
+            "uriTemplate": "/popup.html?uri=%s"
+        },
+        {
+            "protocol": "web+stellar",
+            "name": "Stellar Network",
+            "uriTemplate": "/popup.html?uri=%s"
+        }
+    ],
 
     "background": {
         "scripts": ["background.js"]
@@ -24,6 +37,13 @@
         "default_icon" : "images/icon48.png",
         "default_title": "Mooney",
         "default_popup": "popup.html"
+    },
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{a98a66c8-5bdd-4473-b9a4-1e988563bfe6}",
+            "strict_min_version": "60.0"
+        }
     },
 
     "icons": {

@@ -1,4 +1,10 @@
+//----------------------------------------
+// Mooney 1.1
+// LL1 Libertarian License 1.0
+//
 // Popup script
+//----------------------------------------
+
 
 var DEBUG = true;
 
@@ -440,9 +446,12 @@ function sendMoney(from, to, amount, note, asset) {
         showStatus('Loading account...');
         server.loadAccount(mainAct.publicKey()).then(function(sourceAccount) {
             showStatus('Preparing transaction...');
-            var builder = new StellarSdk.TransactionBuilder(sourceAccount);
+            const baseFee = StellarSdk.BASE_FEE;
+            //console.log('Fee',StellarSdk.BASE_FEE);
+            var builder = new StellarSdk.TransactionBuilder(sourceAccount, { fee: baseFee });
             builder.addOperation(operation);
             if(note) { builder.addMemo(StellarSdk.Memo.text(note)) }
+            builder.setTimeout(30);
             var env = builder.build();
             showStatus('Signing transaction...');
             env.sign(mainAct);

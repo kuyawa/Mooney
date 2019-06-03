@@ -1,4 +1,10 @@
+//----------------------------------------
+// Mooney 1.1
+// LL1 Libertarian License 1.0
+//
 // Background script
+//----------------------------------------
+
 
 //navigator.registerProtocolHandler("web+stellar","popup.html?uri=%s","Mooney");
 
