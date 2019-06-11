@@ -1,4 +1,9 @@
+//----------------------------------------
+// Mooney 1.2
+//
 // Background script
+//----------------------------------------
+
 
 //navigator.registerProtocolHandler("web+stellar","chrome-extension://"+chrome.runtime.id+"/popup.html?uri=%s","Mooney");
 
@@ -23,7 +28,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
 	});
 
     //chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {});
-	
+
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
         chrome.declarativeContent.onPageChanged.addRules([{
             conditions: [new chrome.declarativeContent.PageStateMatcher({pageUrl: {schemes: ['file','http','https']}})],

@@ -5,7 +5,7 @@
 //----------------------------------------
 
 
-var DEBUG = true;
+var DEBUG = false;
 
 const Panels = { login:'login', balances:'balances', history:'history', payment:'payment', offers:'offers', trustline:'trustline', inflation:'inflation', transaction:'transaction', options:'options', warning:'warning' };
 const Ops = { pay: 'pay', payment: 'payment', offer: 'manageOffer', trustline: 'changeTrust', inflation: 'setOptions', tx: 'tx' };
@@ -140,6 +140,7 @@ function clearToast() {
     toaster.removeEventListener('click', clearToast, false);
     toaster.style.display = 'none';
 }
+
 
 //---- LOGIN ----------------------------------------
 

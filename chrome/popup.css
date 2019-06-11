@@ -1,4 +1,9 @@
-/* POPUP */
+/* ----------------------------------------
+// Mooney 1.2
+//
+// Popup style
+// ----------------------------------------
+*/
 
 body { width: 415px; height: 480px; display: flex; flex: 1; }
 body { position: relative; overflow: hidden; max-width: 415px; max-height: 480px; margin: 0 auto; font: normal 1em/1.4 sans-serif; color: #E0E6EA; background-color: #1A262C; }

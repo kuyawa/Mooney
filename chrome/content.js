@@ -1,3 +1,9 @@
+//----------------------------------------
+// Mooney 1.2
+//
+// Content script
+//----------------------------------------
+
 var lastLink = null;
 
 //console.log('Content script loaded');

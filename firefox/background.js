@@ -100,7 +100,6 @@ function clearAccount() {
 }
 
 function notify(link) {
-	//var uri    = escape(link);  // Link must be urlencoded
 	var uri    = encodeURIComponent(link);  // Link must be urlencoded
 	var width  = 415; //520;
 	var height = 518; //620;
