@@ -1196,7 +1196,7 @@ var StellarSdk =
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
 	/** Used as a reference to the global object. */
-	var root = freeGlobal || freeSelf || (function() { return this; })(); // Function('return this')();
+	var root = freeGlobal || freeSelf || Function('return this')();
 
 	module.exports = root;
 
@@ -20845,7 +20845,7 @@ var StellarSdk =
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
 	/** Used as a reference to the global object. */
-	var root = freeGlobal || freeSelf || (function() { return this; })(); // Function('return this')();
+	var root = freeGlobal || freeSelf || Function('return this')();
 
 	module.exports = root;
 
@@ -29521,7 +29521,7 @@ var StellarSdk =
 	var global = module.exports = typeof window != 'undefined' && window.Math == Math
 	  ? window : typeof self != 'undefined' && self.Math == Math ? self
 	  // eslint-disable-next-line no-new-func
-	  : (function() { return this; })(); // : Function('return this')();
+	  : Function('return this')();
 	if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 
@@ -36916,7 +36916,7 @@ var StellarSdk =
 
 	    // Browser.
 	    } else {
-	        if ( !globalObj ) globalObj = typeof self != 'undefined' ? self : (function() { return this; })(); // Function('return this')();
+	        if ( !globalObj ) globalObj = typeof self != 'undefined' ? self : Function('return this')();
 	        globalObj.BigNumber = BigNumber;
 	    }
 	})(this);
@@ -48190,7 +48190,7 @@ var StellarSdk =
 	    function setImmediate(callback) {
 	      // Callback can either be a function or a string
 	      if (typeof callback !== "function") {
-	        throw new TypeError("Callback must be a function. String injection must be avoided"); // callback = new Function("" + callback);
+	        callback = new Function("" + callback);
 	      }
 	      // Copy function arguments
 	      var args = new Array(arguments.length - 1);
@@ -54824,7 +54824,7 @@ var StellarSdk =
 
 	function attemptVertx() {
 	  try {
-	    var vertx = (function() { return this; })().require('vertx'); //var vertx = Function('return this')().require('vertx');
+	    var vertx = Function('return this')().require('vertx');
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -55830,7 +55830,7 @@ var StellarSdk =
 	    local = self;
 	  } else {
 	    try {
-	      local = (function() { return this; })(); // local = Function('return this')();
+	      local = Function('return this')();
 	    } catch (e) {
 	      throw new Error('polyfill failed because global object is unavailable in this environment');
 	    }

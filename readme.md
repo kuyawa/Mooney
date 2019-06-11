@@ -6,18 +6,21 @@
 
 ### Screenshots
 
-![screenshot](./shots/mooney.jpg)
 ![screenshot](./shots/mooney1.jpg)
 ![screenshot](./shots/mooney2.jpg)
 ![screenshot](./shots/mooney3.jpg)
 ![screenshot](./shots/mooney4.jpg)
 ![screenshot](./shots/mooney5.jpg)
+![screenshot](./shots/mooney.jpg)
 
 ## TODO:
 
-- [x] Firefox Add-ons
+- [ ] Firefox Add-ons
 - [ ] Chrome Play Store
 - [ ] Apple App Store
+- [ ] Opera
+- [ ] Brave
+- [ ] Vivaldi
 
 ## Disclaimer
 
